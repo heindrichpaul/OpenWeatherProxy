@@ -3,12 +3,14 @@ package com.capgemini.logiusassesment.controller;
 import com.capgemini.logiusassesment.model.proxymodel.OpenWeatherMapCommand;
 import com.capgemini.logiusassesment.services.OpenWeatherMapCommandService;
 import com.capgemini.logiusassesment.services.exceptions.CityNotFoundException;
-import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("/weatherproxy")
 public class WeatherProxyController {
 
@@ -30,7 +32,7 @@ public class WeatherProxyController {
     }
 
     @DeleteMapping("/cities/{cityName}")
-    public void DeleteCityInformationFromH2(@NonNull @PathVariable String cityName) {
+    public void DeleteCityInformationFromH2( @PathVariable @NotNull String cityName) {
         this.openWeatherMapCommandService.removeByName(cityName);
     }
 
