@@ -3,6 +3,7 @@ package com.capgemini.logiusassesment.controller;
 import com.capgemini.logiusassesment.model.proxymodel.OpenWeatherMapCommand;
 import com.capgemini.logiusassesment.services.OpenWeatherMapCommandService;
 import com.capgemini.logiusassesment.services.exceptions.CityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ public class WeatherProxyController {
 
     private final OpenWeatherMapCommandService openWeatherMapCommandService;
 
+    @Autowired
     public WeatherProxyController(OpenWeatherMapCommandService openWeatherMapCommandService) {
         this.openWeatherMapCommandService = openWeatherMapCommandService;
     }
