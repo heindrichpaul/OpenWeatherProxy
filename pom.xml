@@ -8,11 +8,10 @@
         <version>2.3.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.capgemini</groupId>
-    <artifactId>logius-assesment</artifactId>
+    <groupId>com.heindrich</groupId>
+    <artifactId>openweatherproxy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>logius-assesment</name>
-    <description>Assesment for Logius</description>
+    <name>openweatherproxy</name>
 
     <properties>
         <java.version>1.8</java.version>

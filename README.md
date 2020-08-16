@@ -1,1 +1,1 @@
-# LogiusAssignment
+# OpenWeatherProxy
