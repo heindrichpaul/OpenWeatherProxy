@@ -20,7 +20,6 @@ public class OpenWeatherMapClient {
     }
 
     public OpenWeatherMapResponse getDataForCity(String name) {
-        OpenWeatherMapResponse response = this.restTemplate.getForObject(String.format(URL,name),OpenWeatherMapResponse.class);
-        return response;
+        return this.restTemplate.getForObject(String.format(URL,name),OpenWeatherMapResponse.class);
     }
 }

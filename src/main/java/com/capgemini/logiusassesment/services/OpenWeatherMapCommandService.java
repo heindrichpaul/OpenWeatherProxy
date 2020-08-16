@@ -1,12 +1,12 @@
 package com.capgemini.logiusassesment.services;
 
 import com.capgemini.logiusassesment.client.OpenWeatherMapClient;
+import com.capgemini.logiusassesment.converters.OpenWeatherMapToOpenWeatherCommandConverter;
 import com.capgemini.logiusassesment.model.openweathermap.OpenWeatherMapResponse;
 import com.capgemini.logiusassesment.model.proxymodel.OpenWeatherMapCommand;
 import com.capgemini.logiusassesment.repositories.OpenWeatherMapCommandRepository;
 import com.capgemini.logiusassesment.services.exceptions.CityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +16,13 @@ import java.util.List;
 public class OpenWeatherMapCommandService {
     private final OpenWeatherMapCommandRepository openWeatherMapCommandRepository;
     private final OpenWeatherMapClient openWeatherMapClient;
-    private final ConversionService conversionService;
+    private final OpenWeatherMapToOpenWeatherCommandConverter openWeatherMapToOpenWeatherCommandConverter;
 
     @Autowired
-    public OpenWeatherMapCommandService(OpenWeatherMapCommandRepository openWeatherMapCommandRepository, OpenWeatherMapClient openWeatherMapClient, ConversionService conversionService) {
+    public OpenWeatherMapCommandService(OpenWeatherMapCommandRepository openWeatherMapCommandRepository, OpenWeatherMapClient openWeatherMapClient, OpenWeatherMapToOpenWeatherCommandConverter openWeatherMapToOpenWeatherCommandConverter) {
         this.openWeatherMapCommandRepository = openWeatherMapCommandRepository;
         this.openWeatherMapClient = openWeatherMapClient;
-        this.conversionService = conversionService;
+        this.openWeatherMapToOpenWeatherCommandConverter = openWeatherMapToOpenWeatherCommandConverter;
     }
 
     public OpenWeatherMapCommand findByName(String name) throws CityNotFoundException {
@@ -49,12 +49,7 @@ public class OpenWeatherMapCommandService {
 
     public void updateDataByName(String name){
         OpenWeatherMapResponse response = openWeatherMapClient.getDataForCity(name);
-        OpenWeatherMapCommand openWeatherMapCommand = conversionService.convert(response,OpenWeatherMapCommand.class);
+        OpenWeatherMapCommand openWeatherMapCommand = openWeatherMapToOpenWeatherCommandConverter.convert(response);
         this.openWeatherMapCommandRepository.save(openWeatherMapCommand);
-        //call to API
-        //Convert
-        //Save
-        //
-//        this.openWeatherMapCommandRepository.save()
     }
 }
